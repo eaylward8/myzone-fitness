@@ -18,11 +18,15 @@ ActiveRecord::Schema.define(version: 2019_11_01_144717) do
   create_table "athletes", force: :cascade do |t|
     t.string "name"
     t.string "username"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "workouts", force: :cascade do |t|
     t.integer "points"
     t.bigint "athlete_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["athlete_id"], name: "index_workouts_on_athlete_id"
   end
 

@@ -3,6 +3,7 @@ class CreateWorkouts < ActiveRecord::Migration[6.0]
     create_table :workouts do |t|
       t.integer :points
       t.references :athlete
+      t.timestamps
     end
   end
 end
