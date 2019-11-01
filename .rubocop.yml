@@ -13,6 +13,6 @@ AllCops:
     - node_modules/**/*
     - spec/*_helper.rb
 Metrics/LineLength:
-  Max: 100
+  Max: 120
 Documentation:
   Enabled: false
