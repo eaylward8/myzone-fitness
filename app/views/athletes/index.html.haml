@@ -1,5 +1,10 @@
-%h1 Loser takes the SAT
+%section.hero.is-primary
+  .hero-body
+    .container
+      %h1.title Loser takes the SAT
 
-%ol
-  - @athletes.each do |athlete|
-    %li= athlete.name
+- one_day = Time.zone.today + 1.day
+- end_date = Date.new(2019, 11, 13)
+- xmax = one_day < end_date ? one_day : end_date
+
+= line_chart @line_chart_data, min: 4000, xtitle: 'Time', ytitle: 'Points', xmax: xmax.to_s

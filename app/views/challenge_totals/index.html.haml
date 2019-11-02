@@ -1,0 +1,10 @@
+-# %h1 Progress
+
+-# <%= line_chart @goals.map { |goal|
+-#     {name: goal.name, data: goal.feats.group_by_week(:created_at).count}
+-# } %>
+
+-# = line_chart @challenge_totals.map { |total| { name: total.athlete.name, data: total.points } }
+
+-# - data = @athletes.map { |athlete| { name: athlete.name, data: athlete.challenge_totals.group_by_hour(:created_at).sum(:points).delete_if{ |_k,v| v.zero? } } }
+-# = line_chart data, min: 4000, xtitle: 'Time', ytitle: 'Points'
