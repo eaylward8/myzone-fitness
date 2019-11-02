@@ -1,6 +1,6 @@
-class CreateWorkouts < ActiveRecord::Migration[6.0]
+class CreateChallengeTotals < ActiveRecord::Migration[6.0]
   def change
-    create_table :workouts do |t|
+    create_table :challenge_totals do |t|
       t.integer :points
       t.references :athlete
       t.timestamps

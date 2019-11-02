@@ -18,7 +18,7 @@ class MyzoneChallengeImporter
     return if data.length < 8 # Expecting 8 records. If less, something must be wrong.
 
     create_athletes(data)
-    create_workouts(data)
+    create_challenge_totals(data)
   end
 
   private
@@ -39,14 +39,14 @@ class MyzoneChallengeImporter
     end
   end
 
-  def create_workouts(data)
+  def create_challenge_totals(data)
     data.each do |record|
       athlete = @athletes.find { |a| record['name'] == a.name }
       myzone_total = record['sort'].to_i # `sort` is the key where points are stored
-      recorded_total = athlete.workouts.sum(:points)
-      next if myzone_total == recorded_total # Skip if points haven't changed
+      # recorded_total = athlete.workouts.sum(:points)
+      # next if myzone_total == recorded_total # Skip if points haven't changed
 
-      athlete.workouts.create(points: myzone_total - recorded_total) # Create new workout with point differential
+      athlete.challenge_totals.create(points: myzone_total) # Create new workout with point differential
     end
   end
 end

@@ -22,12 +22,12 @@ ActiveRecord::Schema.define(version: 2019_11_01_144717) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "workouts", force: :cascade do |t|
+  create_table "challenge_totals", force: :cascade do |t|
     t.integer "points"
     t.bigint "athlete_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["athlete_id"], name: "index_workouts_on_athlete_id"
+    t.index ["athlete_id"], name: "index_challenge_totals_on_athlete_id"
   end
 
 end
