@@ -1,10 +1,12 @@
-%section.hero.is-primary
+%section.hero.is-info.is-bold
   .hero-body
     .container
-      %h1.title Loser takes the SAT
+      %h1.title Loser Takes the SAT
+      %h2.subtitle Current Loser: #{@sat_taker}
 
-- one_day = Time.zone.today + 1.day
-- end_date = Date.new(2019, 11, 13)
-- xmax = one_day < end_date ? one_day : end_date
+-# - one_day = Time.zone.today + 1.day
+- plus_half_day = Time.zone.now + 12.hours
+- end_time = DateTime.new(2019, 11, 14)
+- xmax = plus_half_day < end_time ? plus_half_day : end_time
 
 = line_chart @line_chart_data, min: 4000, xtitle: 'Time', ytitle: 'Points', xmax: xmax.to_s
