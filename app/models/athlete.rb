@@ -5,8 +5,12 @@ class Athlete < ApplicationRecord
 
   validates :myzone_usr_guid, uniqueness: true
 
+  def self.standings
+    includes(:challenge_totals).group(:name).maximum(:points).sort_by { |_name, points| -points }
+  end
+
   def self.sat_taker
-    joins(:challenge_totals).group(:name).sum('challenge_totals.points').min_by { |name, points| points }[0]
+    joins(:challenge_totals).group(:name).sum('challenge_totals.points').min_by { |_name, points| points }[0]
   end
 
   def line_chart_data

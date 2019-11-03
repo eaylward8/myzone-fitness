@@ -1,12 +1,42 @@
-%section.hero.is-info.is-bold
+%section.hero.is-info.is-bold.is-small
   .hero-body
     .container
       %h1.title Loser Takes the SAT
-      %h2.subtitle Current Loser: #{@sat_taker}
+      %h2.subtitle
+        Current Loser:
+        %strong= @sat_taker
 
 -# - one_day = Time.zone.today + 1.day
 - plus_half_day = Time.zone.now + 12.hours
 - end_time = DateTime.new(2019, 11, 14)
 - xmax = plus_half_day < end_time ? plus_half_day : end_time
 
-= line_chart @line_chart_data, min: 4000, xtitle: 'Time', ytitle: 'Points', xmax: xmax.to_s
+%section#content-section
+  .container
+    .tile.is-ancestor
+      .tile.is-parent.is-7
+        .tile.is-child.box
+          = line_chart(line_chart_data_path,
+                       id: 'line-chart',
+                       min: 4000,
+                       xtitle: 'Time',
+                       ytitle: 'Points',
+                       xmax: xmax.to_s)
+      .tile.is-parent.is-5
+        .tile.is-child.box
+          %table.table.is-fullwidth.is-hoverable
+            %thead
+              %tr
+                %th Place
+                %th Name
+                %th Pts
+                %th Pts Behind
+            %tbody
+              - @standings.each_with_index do |name_pt_arr, idx|
+                %tr{class: "#{bg_class(idx)}"}
+                  %td= idx + 1
+                  %td
+                    %span= name_pt_arr[0]
+                    %span= standings_icon(idx)
+                  %td= name_pt_arr[1]
+                  %td= name_pt_arr[1] - @standings[0][1]

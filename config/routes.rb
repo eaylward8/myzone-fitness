@@ -3,5 +3,5 @@ Rails.application.routes.draw do
   root to: 'athletes#index'
 
   resources :athletes, only: %i[index show]
-  resources :challenge_totals, only: :index
+  get 'line_chart_data', to: 'athletes#line_chart_data'
 end
