@@ -19,4 +19,13 @@ module AthletesHelper
     days = (Time.zone.today - Athlete::CHALLENGE_START).to_f
     (points / days).round
   end
+
+  def next_refresh
+    hour = Time.now.getlocal.hour
+    return '2PM EST' if (10..13).include? hour
+    return '6PM EST' if (14..17).include? hour
+    return '10PM EST' if (18..21).include? hour
+
+    '10AM EST'
+  end
 end
