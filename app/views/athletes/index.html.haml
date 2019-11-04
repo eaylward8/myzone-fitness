@@ -4,7 +4,7 @@
       %h1.title Loser Takes the SAT
       %h2.subtitle
         Current Loser:
-        %strong= @sat_taker
+        %strong= @standings.last[0]
 
 -# - one_day = Time.zone.today + 1.day
 - plus_half_day = Time.zone.now + 12.hours
@@ -27,7 +27,7 @@
           %table.table.is-fullwidth.is-hoverable
             %thead
               %tr
-                %th Place
+                %th &nbsp
                 %th Name
                 %th Pts
                 %th Pts Behind

@@ -4,7 +4,6 @@ class AthletesController < ApplicationController
   def index
     # @athletes = Athlete.all.includes(:challenge_totals).order('challenge_totals.created_at DESC').limit(8)
     @standings = Athlete.standings
-    @sat_taker = Athlete.sat_taker
   end
 
   def line_chart_data

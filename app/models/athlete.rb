@@ -9,10 +9,6 @@ class Athlete < ApplicationRecord
     includes(:challenge_totals).group(:name).maximum(:points).sort_by { |_name, points| -points }
   end
 
-  def self.sat_taker
-    joins(:challenge_totals).group(:name).sum('challenge_totals.points').min_by { |_name, points| points }[0]
-  end
-
   def line_chart_data
     challenge_totals.group_by_hour(:created_at).sum(:points).delete_if { |_k, v| v.zero? }
   end
