@@ -5,6 +5,8 @@ class Athlete < ApplicationRecord
 
   validates :myzone_usr_guid, uniqueness: true
 
+  CHALLENGE_START = Date.new(2019, 10, 14)
+
   def self.standings
     includes(:challenge_totals).group(:name).maximum(:points).sort_by { |_name, points| -points }
   end

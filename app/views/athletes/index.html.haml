@@ -30,13 +30,16 @@
                 %th &nbsp
                 %th Name
                 %th Pts
+                %th Avg
                 %th Pts Behind
             %tbody
               - @standings.each_with_index do |name_pt_arr, idx|
+                - pts = name_pt_arr[1]
                 %tr{class: "#{bg_class(idx)}"}
                   %td= idx + 1
                   %td
                     %span= name_pt_arr[0]
                     %span= standings_icon(idx)
-                  %td= name_pt_arr[1]
-                  %td= name_pt_arr[1] - @standings[0][1]
+                  %td= pts
+                  %td= points_per_day(pts)
+                  %td= pts - @standings[0][1]

@@ -14,4 +14,9 @@ module AthletesHelper
 
     content_tag(:i, nil, class: 'fas fa-dollar-sign fa-sm has-text-danger') * (idx - 3) if idx > 3
   end
+
+  def points_per_day(points)
+    days = (Time.zone.today - Athlete::CHALLENGE_START).to_f
+    (points / days).round
+  end
 end
