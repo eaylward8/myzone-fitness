@@ -21,7 +21,8 @@ module AthletesHelper
   end
 
   def next_refresh
-    hour = Time.zone.now.hour
+    # hour = Time.zone.now.hour
+    hour = Time.zone.now.in_time_zone('Eastern Time (US & Canada)').hour
     return '2PM EST' if (10..13).include? hour
     return '6PM EST' if (14..17).include? hour
     return '10PM EST' if (18..21).include? hour

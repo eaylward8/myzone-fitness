@@ -2,18 +2,15 @@
   .hero-body
     .container
       %h1.title Loser Takes the SAT
-      -# %h2.subtitle
-        Current Loser:
-        %strong= @standings.last[0]
 %nav.level.is-mobile
   .level-item.has-text-centered
     %div
       %p.heading Current Loser
       %p.title.is-size-5-mobile= @standings.last[0]
-  -# .level-item.has-text-centered
-  -#   %div
-  -#     %p.heading Next Refresh
-  -#     %p.title.is-size-5-mobile= next_refresh
+  .level-item.has-text-centered
+    %div
+      %p.heading Next Refresh
+      %p.title.is-size-5-mobile= next_refresh
   .level-item.has-text-centered
     %div
       %p.heading Cumulative Pts
