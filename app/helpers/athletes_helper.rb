@@ -3,6 +3,7 @@
 module AthletesHelper
   def bg_class(idx)
     return 'has-background-danger' if idx == 7
+    return 'has-background-grey-lighter' if idx == 3
     return 'has-background-success' if idx < 3
 
     'has-background-warning' if idx > 3
@@ -21,7 +22,13 @@ module AthletesHelper
   end
 
   def next_refresh
+    # UTC implementation
     # hour = Time.zone.now.hour
+    # return '10AM EST' if (3..14).include? hour
+    # return '2PM EST' if (15..18).include? hour
+    # return '6PM EST' if (19..22).include? hour
+    # '10PM EST'
+
     hour = Time.zone.now.in_time_zone('Eastern Time (US & Canada)').hour
     return '2PM EST' if (10..13).include? hour
     return '6PM EST' if (14..17).include? hour

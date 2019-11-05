@@ -1,5 +1,10 @@
 @import '~bulma/bulma';
 
+body {
+  min-height: 100vh;
+  background-color: $grey-lighter;
+}
+
 // .margin-top {
 //   margin-top: 24px;
 // }
