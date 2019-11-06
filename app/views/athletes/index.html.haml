@@ -2,17 +2,20 @@
   .hero-body
     .container
       %h1.title Loser Takes the SAT
-%nav.level.is-mobile
+      %h2.subtitle
+        Next Refresh:
+        %strong= next_refresh
+%nav.level
   .level-item.has-text-centered
     %div
       %p.heading Current Loser
       %p.title.is-size-6-mobile= @standings.last[0]
-  -# .level-item.has-text-centered
+  .level-item.has-text-centered
     %div
       %p.heading Time Remaining
       %p#countdown.title.is-size-6-mobile
         %i.fas.fa-haykal.fa-spin
-  .level-item.has-text-centered
+  -# .level-item.has-text-centered
     %div
       %p.heading Next Refresh
       %p.title.is-size-6-mobile= next_refresh
@@ -53,6 +56,6 @@
                   %td
                     %span= name_pt_arr[0]
                     %span= standings_icon(idx)
-                  %td= pts
+                  %td= number_with_delimiter(pts)
                   %td= points_per_day(pts)
                   %td= pts - @standings[0][1]

@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
   window.addEventListener('resize', redrawChart);
-  Timer.start(1573603200 * 1000);
+  const endTime = new Date(2019, 10, 13, 23, 59, 59).getTime(); // End time in ms
+  // Timer.start(1573603200 * 1000);
+  Timer.start(endTime);
 });
 
 
@@ -10,10 +12,10 @@ function redrawChart() {
 }
 
 class Timer {
-  static start(end) {
+  static start(endTime) {
     setInterval(function() {
       let now = Date.now();
-      let remaining = end - now;
+      let remaining = endTime - now;
 
       if (remaining > 0) {
         let countdownData = Timer.convertTime(remaining);
