@@ -47,7 +47,8 @@
                 %th Name
                 %th Pts
                 %th Avg
-                %th Pts Behind
+                %th Pts Back
+                %th x Norm*
             %tbody
               - @standings.each_with_index do |name_pt_arr, idx|
                 - pts = name_pt_arr[1]
@@ -59,3 +60,9 @@
                   %td= number_with_delimiter(pts)
                   %td= points_per_day(pts)
                   %td= pts - @standings[0][1]
+                  %td= times_normal(pts)
+          -# %p.is-size-6 * MyZone recommends 1,300 points/month to reach the WHO guidelines for cardiovascular physical activity.
+          %article.message.is-info
+            .message-body.is-size-7
+              * MyZone recommends 1,300 points/month to reach WHO guidelines for cardiovascular physical activity.
+

@@ -21,6 +21,10 @@ module AthletesHelper
     (points / days).round
   end
 
+  def times_normal(pts)
+    (pts / 1300.0).round(2)
+  end
+
   def next_refresh
     # UTC implementation
     # hour = Time.zone.now.hour
