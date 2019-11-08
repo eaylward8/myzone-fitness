@@ -15,10 +15,6 @@
       %p.heading Time Remaining
       %p#countdown.title.is-size-6-mobile
         %i.fas.fa-haykal.fa-spin
-  -# .level-item.has-text-centered
-    %div
-      %p.heading Next Refresh
-      %p.title.is-size-6-mobile= next_refresh
   .level-item.has-text-centered
     %div
       %p.heading Cumulative Pts
@@ -59,9 +55,8 @@
                     %span= standings_icon(idx)
                   %td= number_with_delimiter(pts)
                   %td= points_per_day(pts)
-                  %td= pts - @standings[0][1]
+                  %td= number_with_delimiter(pts - @standings[0][1])
                   %td= times_normal(pts)
-          -# %p.is-size-6 * MyZone recommends 1,300 points/month to reach the WHO guidelines for cardiovascular physical activity.
           %article.message.is-info
             .message-body.is-size-7
               * MyZone recommends 1,300 points/month to reach WHO guidelines for cardiovascular physical activity.

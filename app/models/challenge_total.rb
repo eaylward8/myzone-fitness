@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ChallengeTotal < ApplicationRecord
-  belongs_to :athlete
+  belongs_to :athlete, touch: true
 
   validates :points, numericality: { greater_than: 0 }
 
