@@ -1,14 +1,23 @@
-document.addEventListener('DOMContentLoaded', function() {
-  window.addEventListener('resize', redrawChart);
+// document.addEventListener('DOMContentLoaded', function() {
+// });
+
+window.onload = function() {
+  redrawChart();
+  this.addEventListener('resize', redrawChart);
+  showMainContent();
   const endTime = new Date(2019, 10, 13, 23, 59, 59).getTime(); // End time in ms
   // Timer.start(1573603200 * 1000);
   Timer.start(endTime);
-});
+};
 
 
 function redrawChart() {
   const chart = Chartkick.charts['line-chart'];
-  if (chart) chart.redraw();
+  if (chart && chart.getData()) chart.redraw();
+}
+
+function showMainContent() {
+  document.getElementById('main-content').classList.remove('is-invisible');
 }
 
 class Timer {
