@@ -10,10 +10,10 @@ module AthletesHelper
   end
 
   def standings_icon(idx)
-    return content_tag(:i, nil, class: 'fas fa-user-graduate') if idx == 7
-    return content_tag(:i, nil, class: 'fas fa-dollar-sign fa-sm') * (3 - idx) if idx < 3
+    return content_tag(:i, nil, class: 'fas fa-user-graduate fa-sm') if idx == 7
+    return content_tag(:i, nil, class: 'fas fa-dollar-sign fa-xs') * (3 - idx) if idx < 3
 
-    content_tag(:i, nil, class: 'fas fa-dollar-sign fa-sm has-text-danger') * (idx - 3) if idx > 3
+    content_tag(:i, nil, class: 'fas fa-dollar-sign fa-xs has-text-danger') * (idx - 3) if idx > 3
   end
 
   def points_per_day(points)
