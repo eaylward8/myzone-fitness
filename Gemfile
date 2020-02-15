@@ -32,6 +32,7 @@ gem 'chartkick'
 gem 'groupdate'
 gem 'mechanize'
 gem 'haml-rails'
+gem 'httparty'
 
 group :development, :test do
   gem 'pry-byebug'
