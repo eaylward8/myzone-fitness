@@ -1,66 +1,50 @@
 require 'httparty'
 require 'json'
-require 'pry-byebug'
 
 class MoveDownloader
+  include HTTParty
+
   BASE_URL = 'https://www.myzonemoves.com/sessioncalls/movesbyguid'
   DATA_PATH = Rails.root.join('data')
   MOVES_BY_CHALLENGE_FILE = 'movesbychallenge.json'
 
-  attr_reader :mbc_data, :move_guids
+  attr_reader :mbc_data, :owner_move_guids
 
   def initialize
     mbc_path = Rails.root.join(DATA_PATH, MOVES_BY_CHALLENGE_FILE)
     @mbc_data = JSON.load(File.open(mbc_path))['data']
-    @move_guids = move_data.map { |move| move['GUID'] }
+    @owner_move_guids = @mbc_data.map { |move| [move['uName'].split(' ').last.downcase, move['GUID'] ] }
   end
 
   def download_files
-    move_guids.each do |guid|
-      # return if file exists. need last name and move_guid
+    owner_move_guids.first(5).each do |owner_move_guid|
+      owner, move_guid = owner_move_guid
 
-      query = { query: { guid: guid } }
-      res = HTTParty.get(BASE_URL, query)
-      res_json = JSON.parse(res.body)
-      lname = res_json['owner']['surname'].downcase
+      if file_exists?(owner, move_guid)
+        puts "File #{move_guid} exists for #{owner}. Skipping..."
+        next
+      end
 
-      new_path = DATA_PATH.join(lname, "#{guid}.json")
-
-      file = File.new(new_path, 'w+')
-      file.write(res.body)
-      file.close
+      download_file(owner, move_guid)
     end
+  end
+
+  def download_file(owner, move_guid)
+    new_path = DATA_PATH.join(owner, "#{move_guid}.json")
+    file = File.new(new_path, 'w+')
+    file.write(move_json(move_guid)) # write GET response to file
+    file.close
+    puts "Saved #{move_guid} for #{owner}"
+  end
+
+  def move_json(move_guid)
+    self.class.get(BASE_URL, { query: { guid: move_guid } })
+  end
+
+  def file_exists?(owner, move_guid)
+    path = Rails.root.join(DATA_PATH, owner, "#{move_guid}.json")
+    File.exists?(path)
   end
 end
 
-
-
-x = MoveDownloader.new
-binding.pry
-
-# path = Rails.root.join(DATA_PATH, 'movesbychallenge.json')
-# data = JSON.load(File.open(path)) # contains other stuff I don't care about
-# move_data = data['data']
-
-# move_guids = move_data.map { |move| move['GUID'] }
-
-guid = move_guids.first
-
-# query = { query: { guid: guid } }
-# res = HTTParty.get(BASE_URL, query)
-# res_json = JSON.parse(res.body)
-
-# lname = res_json['owner']['surname'].downcase
-
-# new_path = DATA_PATH.join(lname, "#{guid}.json")
-
-# file = File.new(new_path, 'w+')
-# file.write(res.body)
-# file.close
-
-
-
-
-
-puts 'yo'
-
+MoveDownloader.new.download_files
