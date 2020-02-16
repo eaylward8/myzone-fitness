@@ -17,7 +17,7 @@ class MoveDownloader
   end
 
   def download_files
-    owner_move_guids.first(5).each do |owner_move_guid|
+    owner_move_guids.each do |owner_move_guid|
       owner, move_guid = owner_move_guid
 
       if file_exists?(owner, move_guid)
